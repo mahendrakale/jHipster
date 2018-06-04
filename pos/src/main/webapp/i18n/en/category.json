@@ -1,0 +1,10 @@
+{
+    "posApp": {
+        "Category" : {
+            "null": "",
+            "FOOD": "FOOD",
+            "CLOTHS": "CLOTHS",
+            "BEVRAGES": "BEVRAGES"
+        }
+    }
+}

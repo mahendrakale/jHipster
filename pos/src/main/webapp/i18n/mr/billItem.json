@@ -1,0 +1,25 @@
+
+{
+    "posApp": {
+        "billItem" : {
+            "home": {
+                "title": "Bill Items",
+                "createLabel": "नवीन Bill Item तयार करा",
+                "createOrEditLabel": "Bill Item तयार किंवा संपादित करा"
+            },
+            "created": "Bill Item [identifier: {{ param }}] तयार आहे",
+            "updated": "Bill Item [identifier: {{ param }}] सुधारित केले आहे",
+            "deleted": "Bill Item [identifier: {{ param }}] हटविले आहे",
+            "delete": {
+                "question": "Bill Item [id: {{ id }}] काढून टाकण्याबाबत पुष्टी?"
+            },
+            "detail": {
+                "title": "Bill Item"
+            },
+            "quantity": "Quantity",
+            "tax": "Tax",
+            "product": "Product",
+            "billNo": "Bill No"
+        }
+    }
+}

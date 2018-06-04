@@ -1,0 +1,76 @@
+<div>
+    <h2>
+        <span jhiTranslate="posApp.bill.home.title">Bills</span>
+        <button class="btn btn-primary float-right jh-create-entity create-bill-pos" [routerLink]="['/', { outlets: { popup: ['bill-pos-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="posApp.bill.home.createLabel">
+            Create new Bill
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="bills">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="billDate"><span jhiTranslate="posApp.bill.billDate">Bill Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="billNo"><span jhiTranslate="posApp.bill.billNo">Bill No</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="totalTax"><span jhiTranslate="posApp.bill.totalTax">Total Tax</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="discount"><span jhiTranslate="posApp.bill.discount">Discount</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="total"><span jhiTranslate="posApp.bill.total">Total</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="paymentId"><span jhiTranslate="posApp.bill.payment">Payment</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdById"><span jhiTranslate="posApp.bill.createdBy">Created By</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let bill of bills ;trackBy: trackId">
+                <td><a [routerLink]="['../bill-pos', bill.id ]">{{bill.id}}</a></td>
+                <td>{{bill.billDate | date:'mediumDate'}}</td>
+                <td>{{bill.billNo}}</td>
+                <td>{{bill.totalTax}}</td>
+                <td>{{bill.discount}}</td>
+                <td>{{bill.total}}</td>
+                <td>
+                    <div *ngIf="bill.paymentId">
+                        <a [routerLink]="['../payment-pos', bill.paymentId  ]" >{{bill.paymentId}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{bill.createdById}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../bill-pos', bill.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'bill-pos/'+ bill.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'bill-pos/'+ bill.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

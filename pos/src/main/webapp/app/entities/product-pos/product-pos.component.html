@@ -1,0 +1,82 @@
+<div>
+    <h2>
+        <span jhiTranslate="posApp.product.home.title">Products</span>
+        <button class="btn btn-primary float-right jh-create-entity create-product-pos" [routerLink]="['/', { outlets: { popup: ['product-pos-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="posApp.product.home.createLabel">
+            Create new Product
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="products">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="posApp.product.productName">Product Name</span></th>
+            <th><span jhiTranslate="posApp.product.description">Description</span></th>
+            <th><span jhiTranslate="posApp.product.category">Category</span></th>
+            <th><span jhiTranslate="posApp.product.barcode">Barcode</span></th>
+            <th><span jhiTranslate="posApp.product.mfDate">Mf Date</span></th>
+            <th><span jhiTranslate="posApp.product.expDate">Exp Date</span></th>
+            <th><span jhiTranslate="posApp.product.price">Price</span></th>
+            <th><span jhiTranslate="posApp.product.tax">Tax</span></th>
+            <th><span jhiTranslate="posApp.product.inventory">Inventory</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let product of products ;trackBy: trackId">
+                <td><a [routerLink]="['../product-pos', product.id ]">{{product.id}}</a></td>
+                <td>{{product.productName}}</td>
+                <td>{{product.description}}</td>
+                <td jhiTranslate="{{'posApp.Category.' + product.category}}">{{product.category}}</td>
+                <td>{{product.barcode}}</td>
+                <td>{{product.mfDate | date:'mediumDate'}}</td>
+                <td>{{product.expDate | date:'mediumDate'}}</td>
+                <td>{{product.price}}</td>
+                <td>
+                    <div *ngIf="product.taxId">
+                        <a [routerLink]="['../tax-pos', product.taxId  ]" >{{product.taxId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="product.inventoryId">
+                        <a [routerLink]="['../inventory-pos', product.inventoryId  ]" >{{product.inventoryId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../product-pos', product.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'product-pos/'+ product.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'product-pos/'+ product.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

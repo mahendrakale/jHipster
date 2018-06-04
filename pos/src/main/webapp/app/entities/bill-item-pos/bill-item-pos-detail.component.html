@@ -1,0 +1,42 @@
+
+<div *ngIf="billItem">
+    <h2><span jhiTranslate="posApp.billItem.detail.title">Bill Item</span> {{billItem.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="posApp.billItem.quantity">Quantity</span></dt>
+        <dd>
+            <span>{{billItem.quantity}}</span>
+        </dd>
+        <dt><span jhiTranslate="posApp.billItem.tax">Tax</span></dt>
+        <dd>
+            <span>{{billItem.tax}}</span>
+        </dd>
+        <dt><span jhiTranslate="posApp.billItem.product">Product</span></dt>
+        <dd>
+            <div *ngIf="billItem.productId">
+                <a [routerLink]="['/product-pos', billItem.productId]">{{billItem.productId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="posApp.billItem.billNo">Bill No</span></dt>
+        <dd>
+            <div *ngIf="billItem.billNoId">
+                <a [routerLink]="['/bill-pos', billItem.billNoId]">{{billItem.billNoId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'bill-item-pos/'+ billItem.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

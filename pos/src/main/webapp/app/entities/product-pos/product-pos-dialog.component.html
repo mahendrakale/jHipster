@@ -1,0 +1,119 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myProductLabel" jhiTranslate="posApp.product.home.createOrEditLabel">Create or edit a Product</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!product.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="product.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="posApp.product.productName" for="field_productName">Product Name</label>
+            <input type="text" class="form-control" name="productName" id="field_productName"
+                [(ngModel)]="product.productName" required/>
+            <div [hidden]="!(editForm.controls.productName?.dirty && editForm.controls.productName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.productName?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="posApp.product.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="product.description" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="posApp.product.category" for="field_category">Category</label>
+            <select class="form-control" name="category" [(ngModel)]="product.category" id="field_category" >
+                <option value="FOOD">{{'posApp.Category.FOOD' | translate}}</option>
+                <option value="CLOTHS">{{'posApp.Category.CLOTHS' | translate}}</option>
+                <option value="BEVRAGES">{{'posApp.Category.BEVRAGES' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="posApp.product.barcode" for="field_barcode">Barcode</label>
+            <input type="text" class="form-control" name="barcode" id="field_barcode"
+                [(ngModel)]="product.barcode" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="posApp.product.mfDate" for="field_mfDate">Mf Date</label>
+            <div class="input-group">
+                <input id="field_mfDate" type="text" class="form-control" name="mfDate" ngbDatepicker  #mfDateDp="ngbDatepicker" [(ngModel)]="product.mfDate"
+                required/>
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="mfDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.mfDate?.dirty && editForm.controls.mfDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.mfDate?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="posApp.product.expDate" for="field_expDate">Exp Date</label>
+            <div class="input-group">
+                <input id="field_expDate" type="text" class="form-control" name="expDate" ngbDatepicker  #expDateDp="ngbDatepicker" [(ngModel)]="product.expDate"
+                required/>
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="expDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.expDate?.dirty && editForm.controls.expDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.expDate?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="posApp.product.price" for="field_price">Price</label>
+            <input type="number" class="form-control" name="price" id="field_price"
+                [(ngModel)]="product.price" required min="0"/>
+            <div [hidden]="!(editForm.controls.price?.dirty && editForm.controls.price?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.price?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.price?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 0 }">
+                    This field should be at least 0.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.price?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="posApp.product.tax" for="field_tax">Tax</label>
+            <select class="form-control" id="field_tax" name="tax" [(ngModel)]="product.taxId">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="taxOption.id" *ngFor="let taxOption of taxes; trackBy: trackTaxById">{{taxOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="posApp.product.inventory" for="field_inventory">Inventory</label>
+            <select class="form-control" id="field_inventory" name="inventory" [(ngModel)]="product.inventoryId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="inventoryOption.id" *ngFor="let inventoryOption of inventories; trackBy: trackInventoryById">{{inventoryOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
