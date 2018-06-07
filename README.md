@@ -1,2 +1,0 @@
-# jHipster
-jHipster samples
