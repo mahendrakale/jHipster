@@ -1,0 +1,29 @@
+
+{
+    "posApp": {
+        "product" : {
+            "home": {
+                "title": "Products",
+                "createLabel": "नवीन Product तयार करा",
+                "createOrEditLabel": "Product तयार किंवा संपादित करा"
+            },
+            "created": "Product [identifier: {{ param }}] तयार आहे",
+            "updated": "Product [identifier: {{ param }}] सुधारित केले आहे",
+            "deleted": "Product [identifier: {{ param }}] हटविले आहे",
+            "delete": {
+                "question": "Product [id: {{ id }}] काढून टाकण्याबाबत पुष्टी?"
+            },
+            "detail": {
+                "title": "Product"
+            },
+            "productName": "Product Name",
+            "description": "Description",
+            "category": "Category",
+            "barcode": "Barcode",
+            "mfDate": "Mf Date",
+            "expDate": "Exp Date",
+            "price": "Price",
+            "tax": "Tax"
+        }
+    }
+}

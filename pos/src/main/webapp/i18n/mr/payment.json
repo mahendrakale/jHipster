@@ -1,0 +1,24 @@
+
+{
+    "posApp": {
+        "payment" : {
+            "home": {
+                "title": "Payments",
+                "createLabel": "नवीन Payment तयार करा",
+                "createOrEditLabel": "Payment तयार किंवा संपादित करा"
+            },
+            "created": "Payment [identifier: {{ param }}] तयार आहे",
+            "updated": "Payment [identifier: {{ param }}] सुधारित केले आहे",
+            "deleted": "Payment [identifier: {{ param }}] हटविले आहे",
+            "delete": {
+                "question": "Payment [id: {{ id }}] काढून टाकण्याबाबत पुष्टी?"
+            },
+            "detail": {
+                "title": "Payment"
+            },
+            "date": "Date",
+            "card": "Card",
+            "paymentMode": "Payment Mode"
+        }
+    }
+}

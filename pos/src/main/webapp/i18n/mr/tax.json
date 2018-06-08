@@ -1,0 +1,24 @@
+
+{
+    "posApp": {
+        "tax" : {
+            "home": {
+                "title": "Taxes",
+                "createLabel": "नवीन Tax तयार करा",
+                "createOrEditLabel": "Tax तयार किंवा संपादित करा"
+            },
+            "created": "Tax [identifier: {{ param }}] तयार आहे",
+            "updated": "Tax [identifier: {{ param }}] सुधारित केले आहे",
+            "deleted": "Tax [identifier: {{ param }}] हटविले आहे",
+            "delete": {
+                "question": "Tax [id: {{ id }}] काढून टाकण्याबाबत पुष्टी?"
+            },
+            "detail": {
+                "title": "Tax"
+            },
+            "taxName": "Tax Name",
+            "category": "Category",
+            "percent": "Percent"
+        }
+    }
+}

@@ -1,0 +1,56 @@
+
+<div *ngIf="product">
+    <h2><span jhiTranslate="posApp.product.detail.title">Product</span> {{product.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="posApp.product.productName">Product Name</span></dt>
+        <dd>
+            <span>{{product.productName}}</span>
+        </dd>
+        <dt><span jhiTranslate="posApp.product.description">Description</span></dt>
+        <dd>
+            <span>{{product.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="posApp.product.category">Category</span></dt>
+        <dd>
+            <span jhiTranslate="{{'posApp.Category.' + product.category}}">{{product.category}}</span>
+        </dd>
+        <dt><span jhiTranslate="posApp.product.barcode">Barcode</span></dt>
+        <dd>
+            <span>{{product.barcode}}</span>
+        </dd>
+        <dt><span jhiTranslate="posApp.product.mfDate">Mf Date</span></dt>
+        <dd>
+            <span>{{product.mfDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="posApp.product.expDate">Exp Date</span></dt>
+        <dd>
+            <span>{{product.expDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="posApp.product.price">Price</span></dt>
+        <dd>
+            <span>{{product.price}}</span>
+        </dd>
+        <dt><span jhiTranslate="posApp.product.tax">Tax</span></dt>
+        <dd>
+            <div *ngIf="product.taxId">
+                <a [routerLink]="['/tax-pos', product.taxId]">{{product.taxId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'product-pos/'+ product.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
