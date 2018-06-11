@@ -1,0 +1,64 @@
+enum Category {
+	FOOD, CLOTHS, BEVRAGES
+}
+
+entity Tax {
+    taxName 	String			required,
+    category	Category		required,
+    percent 	Long 			required 	min(0) max(100)
+}
+
+entity Product {
+	productName 	String			required,
+    description 	String,
+    category		Category,
+    barcode			String,
+    mfDate			LocalDate		required,
+    expDate			LocalDate		required,
+    price 			Long			required	min(0)
+}
+
+enum PaymentMode {
+	CASH, CARD, WALLET
+}
+
+entity Payment {
+	date 		LocalDate		required,
+    card 		String			maxlength(19),
+    paymentMode PaymentMode		required
+}
+
+entity BillItem {
+    quantity 	Integer		required	min(1),
+    tax 		Long
+}
+
+entity Bill {
+	billDate	LocalDate 	required,
+    billNo		String 		required,
+	totalTax 	String		maxlength(13),
+    discount 	Long		min(0),
+    total 		String 		maxlength(13)
+}
+
+/** defining multiple OneToMany relationships with comments */
+relationship OneToMany {
+	Bill{items}    to  BillItem
+}
+
+relationship OneToOne {
+    Product{tax}          to Tax,
+	Bill{payment} 		to Payment,
+    BillItem{product}	    to Product
+}
+
+// Set pagination options
+paginate Bill with infinite-scroll
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+angularSuffix * with pos

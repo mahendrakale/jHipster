@@ -1,0 +1,22 @@
+Instructins :
+=============
+1. Install Node & Yarn
+2. Run ./mvnw
+3. Ctrl+c to Stop run of spring boot started by mvnw
+3. yarn start
+4. yarn stop
+5. Run again ./mvnw
+6. Run ./gen-data.sh to generate bill data
+7. Run ./show-bill.sh to view the generated bill
+8. UI available on http://localhost:8080/
+9. user name : admin  passwod : admin
+
+Features added :
+===============
+1. Basic CRUD operations
+2. Authentication using JWT
+3. OpenAuth integration
+4. UML model : model.png
+5. Bill Generation feature
+6. API docs : http://localhost:8080/#/docs
+
